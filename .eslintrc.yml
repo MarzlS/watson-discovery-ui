@@ -17,9 +17,6 @@ rules:
   indent:
     - error
     - 2
-  linebreak-style:
-    - error
-    - unix
   quotes:
     - error
     - single
@@ -27,6 +24,6 @@ rules:
     - error
     - always
   no-console:
-    - warn
+    - off
   react/no-deprecated:
     - warn

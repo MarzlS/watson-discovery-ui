@@ -39,6 +39,12 @@ export default class Matches extends React.Component {
    * highlighted words.
    */
   getTitle(item) {
+    if (item.title && item.highlight.showHighlight && item.highlight.title) {
+      return '<style>em {background:#ffffb3;}</style>' + item.highlight.title;
+    } else {
+      return item.title ? item.title : 'No Title';
+    }
+    /*
     if (item.title && item.highlight.showHighlight && item.highlight.titleIndexes.length > 0) {
       var str = '<style>hilite {background:#ffffb3;}</style>';
       item.highlight.titleIndexes.forEach(function(element) {
@@ -53,13 +59,26 @@ export default class Matches extends React.Component {
     } else {
       return item.title ? item.title : 'No Title';
     }
+    */
   }
 
   /**
-   * getText - format text, setting backgroud color for all
+   * getTextSummary - format text, setting backgroud color for all
    * highlighted words.
    */
-  getText(item, text) {
+  getTextSummary(item, text) {
+    if (item.highlight.showHighlight && item.highlight.text) {
+      return '<style>em {background:#ffffb3;}</style>' + item.highlight.text;
+    } else {
+      return text ? text : 'No Description';
+    }
+  }
+
+  /**
+   * getTextFull - format text, setting backgroud color for all
+   * highlighted words.
+   */
+  getTextFull(item, text) {
     if (item.highlight.showHighlight && item.highlight.textIndexes.length > 0) {
       var str = '<style>hilite {background:#ffffb3;}</style>';
       var currIdx = 0;
@@ -90,10 +109,16 @@ export default class Matches extends React.Component {
     return score;
   }
 
-   /**
+  /**
    * getSubtitle.
    */
   getSubtitle(item) {
+    if (item.subtitle && item.highlight.showHighlight && item.highlight.subtitle) {
+      return '<style>em {background:#ffffb3;}</style>' + item.highlight.subtitle;
+    } else {
+      return item.subtitle ? item.subtitle : '';
+    }
+    /*
     if (item.subtitle && item.highlight.showHighlight && item.highlight.subtitleIndexes.length > 0) {
       var str = '<style>hilite {background:#ffffb3;}</style>';
       item.highlight.subtitleIndexes.forEach(function(element) {
@@ -108,6 +133,7 @@ export default class Matches extends React.Component {
     } else {
       return item.subtitle ? item.subtitle : '';
     }
+    */
   }
 
   /**
@@ -128,6 +154,8 @@ export default class Matches extends React.Component {
    */
   getSentiment(item) {
     var score = Number(item.sentimentScore).toFixed(2);
+    if (item.filename)
+      score = item.filename + ' / ' + score;
     var color = 'grey';
     switch (item.sentimentLabel) {
     case 'negative':
@@ -169,10 +197,19 @@ export default class Matches extends React.Component {
               </List.Header>
             </List.Content>
             <List.Content>
+              <List.Header>
+                <List.Description>
+                  <h2>
+                    <span dangerouslySetInnerHTML={{__html: this.getSubtitle(item)}}></span>
+                  </h2>
+                </List.Description>
+              </List.Header>
+            </List.Content>
+            <List.Content>
               <List.Description>
                 <h3>
                   <br/>
-                  <span dangerouslySetInnerHTML={{__html: this.getText(item, item.textFull)}}></span>
+                  <span dangerouslySetInnerHTML={{__html: this.getTextFull(item, item.textFull)}}></span>
                   <br/>
                 </h3>
               </List.Description>
@@ -226,7 +263,7 @@ export default class Matches extends React.Component {
                 <MatchItem
                   key={ item.id }
                   title={ this.getTitle(item) }
-                  text={ this.getText(item, item.textBlurb) }
+                  text={ this.getTextSummary(item, item.textBlurb) }
                   moreButton= { this.getMoreButton(item) }
                   highlightText={ item.highlightText }
                   score={ this.getScore(item) }

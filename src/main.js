@@ -108,7 +108,10 @@ class Main extends React.Component {
       selectedKeywords: selectedKeywords || new Set(),
       selectedEntityTypes: selectedEntityTypes || new Set(),
       // tag cloud
+      tagCloudType: tagCloudType || utils.KEYWORD_FILTER,
+      /*
       tagCloudType: tagCloudType || utils.ENTITY_FILTER,
+      */
       // trending chart
       trendData: trendData || null,
       trendError: trendError,
@@ -118,7 +121,7 @@ class Main extends React.Component {
       sentimentTerm: sentimentTerm || utils.SENTIMENT_TERM_ITEM,
       // misc panel
       currentPage: currentPage || '1',  // which page of matches are we showing
-      activeFilterIndex: 0,             // which filter index is expanded/active
+      activeFilterIndex: utils.ENTITY_DATA_INDEX,             // which filter index is expanded/active
       sessionToken: sessionToken || ''
     };
   }
@@ -784,7 +787,7 @@ class Main extends React.Component {
     const { activeFilterIndex } = this.state;
 
     const stat_items = [
-      { key: 'matches', label: 'REVIEWS', value: numMatches },
+      { key: 'matches', label: 'RESULTS', value: numMatches },
       { key: 'positive', label: 'POSITIVE', value: numPositive },
       { key: 'neutral', label: 'NEUTRAL', value: numNeutral },
       { key: 'negative', label: 'NEGATIVE', value: numNegative }

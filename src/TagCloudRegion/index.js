@@ -193,7 +193,7 @@ export default class TagCloudRegion extends React.Component {
             simple
             item
             onChange={ this.cloudTypeChange.bind(this) }
-            defaultValue={ utils.ENTITY_FILTER }
+            defaultValue={ utils.KEYWORD_FILTER }
             options={ utils.filterTypes }
           />
         </Menu>

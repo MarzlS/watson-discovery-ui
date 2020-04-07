@@ -32,7 +32,7 @@ const MatchItem = props => (
       </List.Header>
     </List.Content>
     <List.Content>
-      { props.subtitle }
+      <span dangerouslySetInnerHTML={{__html: props.subtitle}}></span>
     </List.Content>
     <List.Content>
       <List.Description>
@@ -51,6 +51,7 @@ const MatchItem = props => (
     </List.Content>
   </List.Item>
 );
+
 
 // type check to ensure we are called correctly
 MatchItem.propTypes = {
