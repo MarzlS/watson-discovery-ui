@@ -92,8 +92,8 @@ export default class SearchField extends React.Component {
     return (
       <Grid className='search-field-grid'>
         <Grid.Column width={12} verticalAlign='middle' textAlign='center'>
-          <Header as='h1' textAlign='center'>
-            Watson Discovery Search
+          <Header as='h2' textAlign='center'>
+            Query IBM Watson Discovery
           </Header>
           <Input
             className='searchinput'
