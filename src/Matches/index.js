@@ -39,14 +39,15 @@ export default class Matches extends React.Component {
    * highlighted words.
    */
   getTitle(item) {
-    if (item.highlight.showHighlight && item.highlight.titleIndexes.length > 0) {
+    if (item.title && item.highlight.showHighlight && item.highlight.titleIndexes.length > 0) {
       var str = '<style>hilite {background:#ffffb3;}</style>';
       item.highlight.titleIndexes.forEach(function(element) {
-        str = str + item.title.substring(0, element.startIdx) +
-          '<hilite>' +
-          item.title.substring(element.startIdx, element.endIdx) +
+        if (element.startIdx > 0)
+          str = str + item.title.toString().substring(0, element.startIdx);
+        str = str + '<hilite>' +
+          item.title.toString().substring(element.startIdx, element.endIdx) +
           '</hilite>' +
-          item.title.substring(element.endIdx);
+          item.title.toString().substring(element.endIdx);
       });
       return str;
     } else {
@@ -89,6 +90,38 @@ export default class Matches extends React.Component {
     return score;
   }
 
+   /**
+   * getSubtitle.
+   */
+  getSubtitle(item) {
+    if (item.subtitle && item.highlight.showHighlight && item.highlight.subtitleIndexes.length > 0) {
+      var str = '<style>hilite {background:#ffffb3;}</style>';
+      item.highlight.subtitleIndexes.forEach(function(element) {
+        if (element.startIdx > 0)
+          str = str + item.subtitle.toString().substring(0, element.startIdx);
+        str = str + '<hilite>' +
+          item.subtitle.toString().substring(element.startIdx, element.endIdx) +
+          '</hilite>' +
+          item.subtitle.toString().substring(element.endIdx);
+      });
+      return str;
+    } else {
+      return item.subtitle ? item.subtitle : '';
+    }
+  }
+
+  /**
+   * getDate.
+   */
+  getDate(item) {
+    var date = item.date;
+
+    if (date) {
+      date = date.toString().replace('Datum:', '');
+    }
+    return date;
+  }
+  
   /**
    * getSentiment - determine which icon to display to represent
    * positive, negative, and neutral sentiment.
@@ -197,8 +230,9 @@ export default class Matches extends React.Component {
                   moreButton= { this.getMoreButton(item) }
                   highlightText={ item.highlightText }
                   score={ this.getScore(item) }
-                  date={ item.date }
+                  date={ this.getDate(item) }
                   sentiment={ this.getSentiment(item) }
+                  subtitle={ this.getSubtitle(item) }
                 />)
               }
             </List>

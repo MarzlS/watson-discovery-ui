@@ -17,7 +17,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Header, Grid, Input, Checkbox } from 'semantic-ui-react';
+
 const utils = require('../../lib/utils');
+
 
 /**
  * This object renders a search field at the top of the web page,
@@ -91,7 +93,7 @@ export default class SearchField extends React.Component {
       <Grid className='search-field-grid'>
         <Grid.Column width={12} verticalAlign='middle' textAlign='center'>
           <Header as='h1' textAlign='center'>
-            Airbnb Review Data for Austin, TX
+            Watson Discovery Search
           </Header>
           <Input
             className='searchinput'

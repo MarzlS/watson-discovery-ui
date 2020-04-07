@@ -30,6 +30,7 @@ import TagCloudRegion from './TagCloudRegion';
 import TrendChart from './TrendChart';
 import SentimentChart from './SentimentChart';
 import { Grid, Dimmer, Button, Menu, Dropdown, Divider, Loader, Accordion, Icon, Header, Statistic } from 'semantic-ui-react';
+import './i18n';
 const utils = require('../lib/utils');
 
 /**
@@ -905,20 +906,6 @@ class Main extends React.Component {
             <Divider hidden/>
             <Divider/>
             <Divider hidden/>
-
-            {/* Tag Cloud Region */}
-    
-            <Grid.Row>
-              <TagCloudRegion
-                entities={entities}
-                categories={categories}
-                concepts={concepts}
-                keywords={keywords}
-                entityTypes={entityTypes}
-                tagCloudType={tagCloudType}
-                onTagItemSelected={this.tagItemSelected.bind(this)}
-              />
-            </Grid.Row>
             
           </Grid.Column>
 
@@ -985,6 +972,25 @@ class Main extends React.Component {
           </Grid.Column>
 
           <Grid.Column width={6}>
+
+
+            {/* Tag Cloud Region */}
+    
+            <Grid.Row>
+              <TagCloudRegion
+                entities={entities}
+                categories={categories}
+                concepts={concepts}
+                keywords={keywords}
+                entityTypes={entityTypes}
+                tagCloudType={tagCloudType}
+                onTagItemSelected={this.tagItemSelected.bind(this)}
+              />
+            </Grid.Row>
+
+            <Divider hidden/>
+            <Divider/>
+            <Divider hidden/>
 
             {/* Sentiment Chart Region */}
 
